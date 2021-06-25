@@ -3,10 +3,18 @@ const express = require('express')
 const app = express()
 const port = 3000
 
+//use moment package to format dates
 const moment = require('moment')
 
 app.use(function (req, res, next) {
-  console.log(`${moment().format("YYYY-MM-DD HH:mm:ss")} | ${req.method} from ${req.url}`)
+  //get request time
+  const reqTime = new Date()
+  //get response time
+  res.on('finish', () => {
+    const resTime = new Date()
+    const totalTime = resTime - reqTime
+    console.log(`${moment(reqTime).format("YYYY-MM-DD HH:mm:ss")} | ${req.method} from ${req.url} | total time: ${totalTime}ms`)
+  })
   next();
 });
 
@@ -25,8 +33,6 @@ app.get('/:id', (req, res) => {
 app.post('/', (req, res) => {
   res.send('新增一筆  Todo')
 })
-
-
 
 app.listen(port, () => {
   console.log(`App running on port ${port}`)
