@@ -17,7 +17,7 @@
 ## Getting Started
 **Clone respository**
 ```
-$ git clone 
+$ git clone https://github.com/jilltu330/middleware_practice.git
 ```
 **Install by npm**
 ```
