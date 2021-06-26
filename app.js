@@ -9,11 +9,12 @@ const moment = require('moment')
 app.use(function (req, res, next) {
   //get request time
   const reqTime = new Date()
+  console.log(`${moment(reqTime).format("YYYY-MM-DD HH:mm:ss")} | ${req.method} from ${req.url}`)
   //get response time
   res.on('finish', () => {
     const resTime = new Date()
     const totalTime = resTime - reqTime
-    console.log(`${moment(reqTime).format("YYYY-MM-DD HH:mm:ss")} | ${req.method} from ${req.url} | total time: ${totalTime}ms`)
+    console.log(`${moment(resTime).format("YYYY-MM-DD HH:mm:ss")} | ${req.method} from ${req.url} | total time: ${totalTime}ms`)
   })
   next();
 });
